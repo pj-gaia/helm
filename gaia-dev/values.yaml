@@ -25,3 +25,14 @@ postgresql:
 
 registry:
   enabled: true
+
+controller:
+  replicaCount: 1
+  image:
+    repository: controller
+    tag: latest
+    pullPolicy: IfNotPresent
+  service:
+    type: NodePort
+    port: 80
+  resources: {}
