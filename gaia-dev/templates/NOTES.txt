@@ -1,0 +1,9 @@
+1. Get the application URL by running these commands:
+{{- if .Values.registry.httpRoute.enabled }}
+{{- if .Values.registry.httpRoute.hostnames }}
+    export APP_HOSTNAME={{ .Values.registry.httpRoute.hostnames | first }}
+{{- else }}
+    export APP_HOSTNAME=$(kubectl get --namespace {{ .Values.registry.httpRoute.gateway.namespace | default .Release.Namespace }} gateway/{{ .Values.registry.httpRoute.gateway.name }} -o jsonpath="{.spec.listeners[0].hostname}")
+  {{- end }}
+    echo "Visit http://$APP_HOSTNAME to use your application"
+{{- end }}
